@@ -1,0 +1,13 @@
+{
+    "name": "uproar"
+  , "description": "Multiuser sound app"
+  , "author": "Nickolay Schwarz <tjbladez@gmail.com>"
+  , "keywords": ["impactjs", "express", "sound", "faye"]
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "express": "2.4.2"
+    , "jade": ">= 0.0.1"
+    , "faye": "0.6.3"
+  }
+}
