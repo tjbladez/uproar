@@ -24,5 +24,4 @@ server messages
 ### Todo ###
 
 * File management: search, add, remove sounds to play
-* Remove custom handshake on start and join people following url
 * Add speak.js support
