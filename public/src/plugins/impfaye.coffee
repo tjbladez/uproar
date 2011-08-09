@@ -6,10 +6,12 @@ ig.module(
 )
 .defines ->
   ig.ImpFaye = ig.Class.extend
-    init: ->
-      @client = new Faye.Client(window.location.href + 'faye')
+    init: (subscriber, opts)->
+      @subscriber = subscriber
+      @client     = new Faye.Client(window.location.href + 'faye')
       @client.handshake =>
         @clientId = @client.getClientId()
+        opts.onHandshake.call(@subscriber) if opts.onHandshake
     publish: (channel, msg) ->
       msg.clientId = @clientId
       @client.publish('/'+channel, msg)

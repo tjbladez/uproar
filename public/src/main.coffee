@@ -11,18 +11,15 @@ ig.module(
   Music = ig.Game.extend
     font: new ig.Font('media/font.png')
     init: ->
-      @faye = new ig.ImpFaye
+      opts = {onHandshake: @subscribe}
+      @faye = new ig.ImpFaye(@, opts)
+    subscribe: ->
       @subscription = @faye.subscribe('play', @musicHandler, @)
-      @handshake = false
-      ig.input.bind(ig.KEY.ENTER, 'ok')
     update: ->
       @parent()
-      if ig.input.pressed('ok')
-        @faye.publish('music', {action: 'handshake'})
-        @handshake = true
     draw: ->
       @parent()
-      @message('Press Enter to establish connection') unless @handshake
+      @message('You are good to go. Enjoy!')
     message: (text) ->
       @font.draw(text, ig.system.width/2, 62, ig.Font.ALIGN.CENTER)
     musicHandler: (msg) ->

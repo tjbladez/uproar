@@ -2,10 +2,14 @@
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   ig.module('plugins.impfaye').requires('impact.impact').defines(function() {
     return ig.ImpFaye = ig.Class.extend({
-      init: function() {
+      init: function(subscriber, opts) {
+        this.subscriber = subscriber;
         this.client = new Faye.Client(window.location.href + 'faye');
         return this.client.handshake(__bind(function() {
-          return this.clientId = this.client.getClientId();
+          this.clientId = this.client.getClientId();
+          if (opts.onHandshake) {
+            return opts.onHandshake.call(this.subscriber);
+          }
         }, this));
       },
       publish: function(channel, msg) {

@@ -4,25 +4,21 @@
     Music = ig.Game.extend({
       font: new ig.Font('media/font.png'),
       init: function() {
-        this.faye = new ig.ImpFaye;
-        this.subscription = this.faye.subscribe('play', this.musicHandler, this);
-        this.handshake = false;
-        return ig.input.bind(ig.KEY.ENTER, 'ok');
+        var opts;
+        opts = {
+          onHandshake: this.subscribe
+        };
+        return this.faye = new ig.ImpFaye(this, opts);
+      },
+      subscribe: function() {
+        return this.subscription = this.faye.subscribe('play', this.musicHandler, this);
       },
       update: function() {
-        this.parent();
-        if (ig.input.pressed('ok')) {
-          this.faye.publish('music', {
-            action: 'handshake'
-          });
-          return this.handshake = true;
-        }
+        return this.parent();
       },
       draw: function() {
         this.parent();
-        if (!this.handshake) {
-          return this.message('Press Enter to establish connection');
-        }
+        return this.message('You are good to go. Enjoy!');
       },
       message: function(text) {
         return this.font.draw(text, ig.system.width / 2, 62, ig.Font.ALIGN.CENTER);
