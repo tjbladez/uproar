@@ -33,11 +33,6 @@
     });
     return res.send(200);
   });
-  client.subscribe('/music', function(msg) {
-    if (msg.action === 'handshake') {
-      return client.publish('/play', 'ready');
-    }
-  });
   bayeux.attach(server);
   server.listen(port);
 }).call(this);

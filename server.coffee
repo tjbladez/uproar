@@ -20,8 +20,5 @@ server.post '/play', (req, res) ->
   client.publish '/play', {action: 'play', sound: req.body.sound}
   res.send(200)
 
-client.subscribe '/music', (msg) ->
-  client.publish '/play', 'ready' if msg.action is 'handshake'
-
 bayeux.attach server
 server.listen port
