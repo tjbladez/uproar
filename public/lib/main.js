@@ -28,7 +28,7 @@
         return this.font.draw(text, ig.system.width / 2, 62, ig.Font.ALIGN.CENTER);
       },
       musicHandler: function(msg) {
-        if (msg.action === 'play') {
+        if (msg.action === 'play' && !ig.soundManager.isPlaying) {
           this.sound = new ig.Sound('media/sounds/' + msg.sound + '.*');
           return this.sound.play();
         }

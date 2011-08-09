@@ -26,7 +26,7 @@ ig.module(
     message: (text) ->
       @font.draw(text, ig.system.width/2, 62, ig.Font.ALIGN.CENTER)
     musicHandler: (msg) ->
-      if msg.action is 'play'
+      if msg.action is 'play' and not ig.soundManager.isPlaying
         @sound = new ig.Sound('media/sounds/'+msg.sound+'.*')
         @sound.play()
   ig.main('#canvas', Music, 60, 320, 240, 1)
